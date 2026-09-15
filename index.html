@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DAI | Detecta. Alerta. Cuida.</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --azul-oscuro: #071a2f;
+            --azul: #0878d1;
+            --azul-claro: #25a7ff;
+            --celeste: #eaf6ff;
+            --blanco: #ffffff;
+            --gris: #64748b;
+            --gris-claro: #f4f7fa;
+            --verde: #18b77a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--azul-oscuro);
+            background: var(--blanco);
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(7, 26, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 18px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--azul-claro);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--azul-claro);
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            padding: 150px 25px 90px;
+            background:
+                radial-gradient(circle at 80% 30%, rgba(37,167,255,0.25), transparent 30%),
+                linear-gradient(135deg, #06182c, #0b3154);
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-container {
+            max-width: 1150px;
+            width: 100%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid rgba(37,167,255,0.5);
+            background: rgba(37,167,255,0.1);
+            border-radius: 50px;
+            color: #8dd4ff;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(50px, 8vw, 90px);
+            line-height: 0.9;
+            letter-spacing: -4px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: var(--azul-claro);
+        }
+
+        .hero h2 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: #cbd9e6;
+            font-size: 17px;
+            margin-bottom: 35px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--azul-claro);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37,167,255,0.25);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* PRODUCT VISUAL */
+
+        .product-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .device {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 1px solid rgba(37,167,255,0.4);
+            background: radial-gradient(circle, rgba(37,167,255,0.2), rgba(37,167,255,0.03) 60%, transparent 61%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .device::before,
+        .device::after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(37,167,255,0.25);
+            border-radius: 50%;
+        }
+
+        .device::before {
+            width: 230px;
+            height: 230px;
+        }
+
+        .device::after {
+            width: 140px;
+            height: 140px;
+        }
+
+        .device-center {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: var(--azul-claro);
+            box-shadow: 0 0 45px rgba(37,167,255,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        /* SECTIONS */
+
+        section {
+            padding: 100px 25px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title .small {
+            color: var(--azul);
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            margin: 10px 0;
+        }
+
+        .section-title p {
+            max-width: 650px;
+            margin: auto;
+            color: var(--gris);
+        }
+
+        /* PROBLEM */
+
+        .problem {
+            background: var(--gris-claro);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .problem-box {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            border-left: 5px solid var(--azul);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.05);
+        }
+
+        .problem-box h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .problem-box p {
+            color: var(--gris);
+        }
+
+        .examples {
+            display: grid;
+            gap: 15px;
+        }
+
+        .example {
+            padding: 18px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .example-number {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--celeste);
+            color: var(--azul);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* HOW IT WORKS */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .step {
+            padding: 35px 28px;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            border-color: var(--azul-claro);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.07);
+        }
+
+        .step-number {
+            color: var(--azul);
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+            font-size: 21px;
+        }
+
+        .step p {
+            color: var(--gris);
+        }
+
+        /* FEATURES */
+
+        .features {
+            background: var(--azul-oscuro);
+            color: white;
+        }
+
+        .features .section-title p {
+            color: #aebdcc;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .feature {
+            padding: 30px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+        }
+
+        .feature h3 {
+            margin: 15px 0 8px;
+        }
+
+        .feature p {
+            color: #aebdcc;
+            font-size: 14px;
+        }
+
+        .feature-icon {
+            font-size: 28px;
+        }
+
+        /* PRODUCT */
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .product-card {
+            background: var(--gris-claro);
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .product-card ul {
+            list-style: none;
+            margin-top: 25px;
+        }
+
+        .product-card li {
+            padding: 12px 0;
+            border-bottom: 1px solid #dde4eb;
+        }
+
+        .product-card li::before {
+            content: "✓";
+            color: var(--verde);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .important {
+            padding: 25px;
+            background: #eef8ff;
+            border-left: 4px solid var(--azul);
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+
+        .important strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* CTA */
+
+        .cta {
+            background: linear-gradient(135deg, #0878d1, #0b4d83);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #dceeff;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #04101d;
+            color: #8495a5;
+            padding: 35px 25px;
+            text-align: center;
+        }
+
+        footer .footer-logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        footer span {
+            color: var(--azul-claro);
+        }
+
+        footer p {
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-container,
+            .problem-grid,
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                text-align: center;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .product-visual {
+                margin-top: 30px;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            section {
+                padding: 70px 20px;
+            }
+
+            .hero h1 {
+                font-size: 60px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .device {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+        <div class="nav-container">
+
+            <div class="logo">
+                DAI<span>.</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#problema">El problema</a></li>
+                <li><a href="#funciona">Cómo funciona</a></li>
+                <li><a href="#producto">El dispositivo</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <header class="hero">
+
+        <div class="hero-container">
+
+            <div>
+
+                <div class="tag">
+                    TECNOLOGÍA ASISTIVA
+                </div>
+
+                <h1>
+                    DAI<span>.</span>
+                </h1>
+
+                <h2>
+                    Detecta. Alerta. Cuida.
+                </h2>
+
+                <p>
+                    Una propuesta tecnológica pensada para complementar
+                    el uso del bastón blanco y ayudar a detectar obstáculos
+                    elevados en espacios interiores.
+                </p>
+
+                <div class="buttons">
+                    <a href="#producto" class="btn btn-primary">
+                        Conocé DAI
+                    </a>
+
+                    <a href="#contacto" class="btn btn-secondary">
+                        Probá el prototipo
+                    </a>
+                </div>
+
+            </div>
+
+
+            <div class="product-visual">
+
+                <div class="device">
+
+                    <div class="device-center">
+                        DAI
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- PROBLEMA -->
+
+    <section class="problem" id="problema">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <div class="small">
+                    El problema
+                </div>
+
+                <h2>
+                    Cuando el bastón no alcanza
+                </h2>
+
+                <p>
+                    El bastón blanco es una herramienta fundamental para
+                    la movilidad, pero determinados obstáculos elevados
+                    pueden quedar fuera de su alcance.
+                </p>
+
+            </div>
+
+
+            <div class="problem-grid">
+
+                <div class="problem-box">
+
+                    <h3>
+                        Una situación cotidiana
+                    </h3>
+
+                    <p>
+                        En interiores pueden aparecer objetos ubicados a
+                        una altura que el bastón no detecta fácilmente.
+                        Esto puede generar golpes o situaciones incómodas
+                        durante el desplazamiento.
+                    </p>
+
+                </div>
+
+
+                <div class="examples">
+
+                    <div class="example">
+
+                        <div class="example-number">
+                            01
+                        </div>
+
+                        <div>
+                            <strong>Puertas de muebles abiertas</strong>
+                            <p>Objetos que sobresalen a la altura del rostro.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="example">
+
+                        <div class="example-number">
+                            02
+                        </div>
+
+                        <div>
+                            <strong>Estantes y repisas</strong>
+                            <p>Elementos elevados que pueden quedar fuera del recorrido del bastón.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="example">
+
+                        <div class="example-number">
+                            03
+                        </div>
+
+                        <div>
+                            <strong>Objetos a la altura de la cabeza</strong>
+                            <p>Obstáculos frontales difíciles de anticipar.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- COMO FUNCIONA -->
+
+    <section id="funciona">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <div class="small">
+                    Tecnología
+                </div>
+
+                <h2>
+                    ¿Cómo funciona DAI?
+                </h2>
+
+                <p>
+                    El dispositivo utiliza detección de distancia y una
+                    señal háptica para advertir al usuario.
+                </p>
+
+            </div>
+
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01 — DETECTA
+                    </div>
+
+                    <h3>
+                        Detecta el entorno
+                    </h3>
+
+                    <p>
+                        Un sensor frontal mide la distancia hacia los
+                        objetos que se encuentran delante del usuario.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02 — PROCESA
+                    </div>
+
+                    <h3>
+                        Analiza la distancia
+                    </h3>
+
+                    <p>
+                        El ESP32 procesa la información obtenida por
+                        el sensor para determinar cuándo debe generarse
+                        una alerta.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03 — ALERTA
+                    </div>
+
+                    <h3>
+                        Vibra
+                    </h3>
+
+                    <p>
+                        Cuando se detecta un obstáculo dentro del rango
+                        establecido, el dispositivo genera una alerta
+                        mediante vibración.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CARACTERISTICAS -->
+
+    <section class="features">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <div class="small">
+                    Características
+                </div>
+
+                <h2>
+                    Diseñado para ser simple
+                </h2>
+
+                <p>
+                    DAI busca concentrarse en una función concreta:
+                    detectar obstáculos elevados y comunicarlo de
+                    forma discreta.
+                </p>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ◉
+                    </div>
+
+                    <h3>
+                        Detección frontal
+                    </h3>
+
+                    <p>
+                        Sensor orientado hacia el frente para identificar
+                        obstáculos elevados.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ≋
+                    </div>
+
+                    <h3>
+                        Alerta háptica
+                    </h3>
+
+                    <p>
+                        La información se transmite mediante vibración,
+                        evitando depender de una señal sonora.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        +
+                    </div>
+
+                    <h3>
+                        Complementario
+                    </h3>
+
+                    <p>
+                        Está pensado para complementar el bastón blanco,
+                        no para reemplazarlo.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ◆
+                    </div>
+
+                    <h3>
+                        Formato discreto
+                    </h3>
+
+                    <p>
+                        El concepto busca integrarse de manera sencilla
+                        al usuario mediante una banda para la cabeza.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PRODUCTO -->
+
+    <section id="producto">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <div class="small">
+                    El proyecto
+                </div>
+
+                <h2>
+                    Un dispositivo pensado para interiores
+                </h2>
+
+                <p>
+                    DAI se encuentra actualmente en etapa de prototipo
+                    y validación.
+                </p>
+
+            </div>
+
+
+            <div class="product-grid">
+
+                <div>
+
+                    <h3 style="font-size: 30px; margin-bottom: 20px;">
+                        Tecnología detrás de DAI
+                    </h3>
+
+                    <p style="color: #64748b;">
+                        La primera versión del dispositivo está basada
+                        en componentes electrónicos accesibles y una
+                        arquitectura sencilla, buscando priorizar
+                        funcionalidad, comodidad y facilidad de uso.
+                    </p>
+
+                    <div class="important">
+
+                        <strong>
+                            Importante
+                        </strong>
+
+                        DAI no busca reemplazar el bastón blanco.
+                        Su objetivo es funcionar como una herramienta
+                        complementaria para situaciones específicas
+                        dentro de espacios interiores.
+
+                    </div>
+
+                </div>
+
+
+                <div class="product-card">
+
+                    <h3>
+                        Primer prototipo
+                    </h3>
+
+                    <ul>
+
+                        <li>
+                            ESP32
+                        </li>
+
+                        <li>
+                            Sensor de distancia HC-SR04
+                        </li>
+
+                        <li>
+                            Batería recargable
+                        </li>
+
+                        <li>
+                            Circuito de carga y regulación
+                        </li>
+
+                        <li>
+                            Motor de vibración
+                        </li>
+
+                        <li>
+                            Banda para la cabeza
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta" id="contacto">
+
+        <div class="container">
+
+            <h2>
+                Queremos seguir mejorándolo.
+            </h2>
+
+            <p>
+                DAI es un proyecto en etapa de desarrollo y validación.
+                Buscamos conocer las experiencias de las personas que
+                podrían utilizar una tecnología de este tipo.
+            </p>
+
+            <div class="buttons" style="justify-content:center;">
+
+                <a href="mailto:contacto@dai-proyecto.com"
+                   class="btn btn-secondary">
+                    Coordinar una prueba
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-logo">
+            DAI<span>.</span>
+        </div>
+
+        <p>
+            Dispositivo de Autonomía en Interiores
+        </p>
+
+        <p style="margin-top: 8px;">
+            Detecta • Alerta • Cuida
+        </p>
+
+        <p style="margin-top: 20px;">
+            Proyecto educativo — E.E.S.T. N.º 4
+        </p>
+
+    </footer>
+
+
+</body>
+</html>
